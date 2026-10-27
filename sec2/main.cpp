@@ -1,29 +1,30 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 
 using namespace std;
 
 int main()
 {
-    ofstream outFile("fruit.txt", ios::app);
-    if (!outFile)
+    ifstream infile("fruit.txt");
+    if(!infile.is_open())
     {
-        cout << "Error opening file for writing!" << endl;
+        cout << "Error opening the file";
     }
-    outFile << "Fresh Fruits" << endl;
-    outFile.close();
-    ifstream inFile("fruit.txt");
-    if (!inFile)
+    string file;
+    while (getline(infile, file))
     {
-        cout << "Error opening file for reading!" << endl;
+        cout << file << endl;
     }
-    string line;
-    cout << "-- File Contents --" << endl;
-    while (getline(inFile, line))
+    infile.close();
+    ofstream outfile("fruit.txt", ios::app);
+    if (!outfile.is_open())
     {
-        cout << line << endl;
+        cout << "Error opening the file";
     }
-    inFile.close();
+    else
+    {
+        outfile << "Fresh Fruits";
+        outfile.close();
+    }
     return 0;
 }
